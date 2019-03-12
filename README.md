@@ -4,6 +4,7 @@
 Quickstart for any development environment using PHP and SQL Server.
 
 ## TODO
-Xdebug Setup
-Complete Environment Setup
-Publish to Docker Hub
+1. Xdebug Setup  
+2. Build instructions  
+3. Complete Environment Setup  
+4. Publish to Docker Hub  
