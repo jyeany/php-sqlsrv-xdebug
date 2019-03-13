@@ -22,5 +22,4 @@ docker run -p 80:80 \
 ```
 
 ## TODO
-1. Complete Environment Setup  
-2. Publish to Docker Hub  
+1. Example complete environment setup  
