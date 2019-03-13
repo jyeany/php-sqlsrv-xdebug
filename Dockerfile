@@ -36,6 +36,13 @@ RUN a2enmod php7.3
 RUN echo "extension=pdo_sqlsrv.so" >> /etc/php/7.3/apache2/conf.d/30-pdo_sqlsrv.ini
 RUN echo "extension=sqlsrv.so" >> /etc/php/7.3/apache2/conf.d/20-sqlsrv.ini
 
+# Install xdebug
+RUN apt install php-xdebug
+
+# Add bash script for specifying xdebug settings
+COPY xdb-settings-start.sh /usr/local/bin/xdb-settings-start.sh
+RUN chmod +x /usr/local/bin/xdb-settings-start.sh
 
 # Start Apache2 Server
-CMD /usr/sbin/apache2ctl -D FOREGROUND
+# CMD /usr/sbin/apache2ctl -D FOREGROUND
+CMD /usr/local/bin/xdb-settings-start.sh
