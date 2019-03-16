@@ -25,7 +25,6 @@ RUN apt update
 RUN apt -y install php7.3 php7.3-dev php7.3-xml -y --allow-unauthenticated 
 
 # Install SQL Server Drivers
-RUN apt -y install unixodbc unixodbc-dev
 RUN pecl install sqlsrv
 RUN pecl install pdo_sqlsrv
 RUN echo extension=pdo_sqlsrv.so >> `php --ini | grep "Scan for additional .ini files" | sed -e "s|.*:\s*||"`/30-pdo_sqlsrv.ini
@@ -33,8 +32,16 @@ RUN echo extension=sqlsrv.so >> `php --ini | grep "Scan for additional .ini file
 RUN a2dismod mpm_event
 RUN a2enmod mpm_prefork
 RUN a2enmod php7.3
+RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
+RUN curl https://packages.microsoft.com/config/ubuntu/18.04/prod.list > /etc/apt/sources.list.d/mssql-release.list
+RUN apt update
+RUN ACCEPT_EULA=Y apt-get install msodbcsql17
+RUN ACCEPT_EULA=Y apt-get install mssql-tools
+RUN echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bash_profile
+RUN echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc
 RUN echo "extension=pdo_sqlsrv.so" >> /etc/php/7.3/apache2/conf.d/30-pdo_sqlsrv.ini
 RUN echo "extension=sqlsrv.so" >> /etc/php/7.3/apache2/conf.d/20-sqlsrv.ini
+RUN apt -y install unixodbc unixodbc-dev
 
 # Install xdebug
 RUN apt install php-xdebug
