@@ -15,11 +15,11 @@ docker run -p 80:80 \
 -e XDEBUG_REMOTE_ENABLE=1 \
 -e XDEBUG_REMOTE_CONNECT_BACK=0 \
 -e XDEBUG_REMOTE_AUTOSTART=1 \
--e XDEBUG_REMOTE_HOST=<your-ip-address> \
+-e XDEBUG_REMOTE_HOST=host.docker.internal \
 -e XDEBUG_REMOTE_PORT=9000 \
 --name php-sqlsrv \
 -d php-sqlsrv
 ```
 
-## TODO
-1. Example complete environment setup  
+1. Example complete environment setup: 
+https://github.com/jyeany/php-docker-lumen-xdebug-sqlsrv
